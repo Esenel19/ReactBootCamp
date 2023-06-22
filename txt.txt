@@ -1,0 +1,7 @@
+      {data.map((ele, index) =>{
+        return <h1>Quizz :{index} {ele.categorie}</h1>
+      })}
+
+
+
+      

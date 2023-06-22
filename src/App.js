@@ -8,7 +8,7 @@ const App = () => {
   var [QuizRep, setQuizRep] = React.useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/quizz")
+    fetch("https://bootcamp-production-b9a5.up.railway.app/quizz")
     .then((response) => response.json())
     .then((response) => setData(response))
     .catch((error) => console.log("Erreur"));

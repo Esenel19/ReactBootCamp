@@ -6,6 +6,7 @@ const App = () => {
   var [INDEX, setIndex] = React.useState(1);
   var [CurentRound, setCurentRound] = React.useState(0);
   var [QuizRep, setQuizRep] = React.useState(true);
+  var [Score, setScore] = React.useState(0);
 
   useEffect(() => {
     fetch("https://bootcamp-production-b9a5.up.railway.app/quizz")
@@ -19,14 +20,14 @@ const App = () => {
   }
 
   return (
-    <div className='App'>
-      <h1>Quizz</h1>
+    <div className='.App'>
+      <h1>Bienvenue, sélèctioner l'un des quizz</h1>
       {QuizRep && data.map((ele, index)  => {
        return (
         <div>
         <button onClick={() => {
             setQuizRep(false);
-            setIndex(index)}}>Quizz {index + 1}{ele.categorie}
+            setIndex(index)}}>Quizz {index + 1}: {ele.categorie}
         </button>
         </div>
        )
@@ -35,32 +36,36 @@ const App = () => {
         <div>
          <button onClick={() => {
             setQuizRep(true)
+            setScore(Score = 0)
             }}>
             Retour
         </button>
+        Question : {data[INDEX]?.rounds[CurentRound].questions}
         {data[INDEX]?.rounds[CurentRound].reponses.map((ele,index) => {
           return (
           <button key={ele} onClick={() => {
-            if(data[INDEX].rounds[CurentRound].corrects.includes(index))
-            {
+            // sconsole.log(data[INDEX].rounds[CurentRound].corrects.includes(index));
               if(data[INDEX]?.rounds[CurentRound + 1])
               {
                 setCurentRound(CurentRound + 1);
               }
-              console.log("bon");
-            }
+              if(data[INDEX].rounds[CurentRound].corrects[index] === 1)
+              {
+                setScore(Score + 1);
+              }
+            console.log("score",Score);
+            console.log("index",index);
           }}>
           {ele}
           </button>
           )}
         )}
         </div>
+        
       )}
-      {data[INDEX]?.rounds[CurentRound].questions}
     </div>
   );
   
 };
-
 // data.line
 export default App;
